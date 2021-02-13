@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_4sdp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/ivTopRated"
+        android:layout_width="@dimen/_75sdp"
+        android:layout_height="@dimen/_110sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"
+        app:riv_border_color="@color/colorTextOther"
+        app:riv_border_width="0.3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_corner_radius="@dimen/_5sdp" />
+
+    <TextView
+        android:id="@+id/tvTopRatedMoviesTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:fontFamily="@font/ubuntu_medium"
+        android:includeFontPadding="false"
+        android:text="Movies name"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintEnd_toEndOf="@id/ivTopRated"
+        app:layout_constraintStart_toStartOf="@id/ivTopRated"
+        app:layout_constraintTop_toBottomOf="@id/ivTopRated" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

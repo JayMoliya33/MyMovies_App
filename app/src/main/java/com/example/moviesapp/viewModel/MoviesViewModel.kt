@@ -10,28 +10,77 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class MoviesViewModel(
-    val moviesRepository: MoviesRepository
-) : ViewModel(){
+        val moviesRepository: MoviesRepository
+) : ViewModel() {
 
-    val moviesdata : MutableLiveData<Resource<MoviesResponse>> = MutableLiveData()
-    var moviesPage = 1
+    val popularMoviesdata: MutableLiveData<Resource<MoviesResponse>> = MutableLiveData()
+    var popularMoviesPage = 1
+    var popularMoviesResponse: MoviesResponse? = null
+
+    val topRatedMoviesdata: MutableLiveData<Resource<MoviesResponse>> = MutableLiveData()
+    var topRatedMoviesPage = 1
+
+    val upcomingMoviesdata: MutableLiveData<Resource<MoviesResponse>> = MutableLiveData()
+    var upcomingMoviesPage = 1
 
     init {
         getPopularMovies()
+        getTopRatedMovies()
+        getUpcomingMovies()
     }
 
-    private fun getPopularMovies() = viewModelScope.launch {
-        moviesdata.postValue(Resource.Loading())
-        val response = moviesRepository.getPopularMovies(moviesPage)
-        moviesdata.postValue(handleMoviesResponse(response))
+     fun getPopularMovies() = viewModelScope.launch {
+        popularMoviesdata.postValue(Resource.Loading())
+        val response = moviesRepository.getPopularMovies(popularMoviesPage)
+        popularMoviesdata.postValue(handlePopularMoviesResponse(response))
     }
 
-    private fun handleMoviesResponse(response : Response<MoviesResponse>) : Resource<MoviesResponse>{
-        if (response.isSuccessful){
+     fun getTopRatedMovies() = viewModelScope.launch {
+        topRatedMoviesdata.postValue(Resource.Loading())
+        val response = moviesRepository.getTopRatedMovies(topRatedMoviesPage)
+        topRatedMoviesdata.postValue(handleTopRatedMoviesResponse(response))
+    }
+
+     fun getUpcomingMovies() = viewModelScope.launch {
+        upcomingMoviesdata.postValue(Resource.Loading())
+        val response = moviesRepository.getUpcomingMovies(upcomingMoviesPage)
+        upcomingMoviesdata.postValue(handleUpcomingMoviesResponse(response))
+    }
+
+    private fun handlePopularMoviesResponse(response: Response<MoviesResponse>): Resource<MoviesResponse> {
+        if (response.isSuccessful) {
+            response.body()?.let { resultResponse ->
+                popularMoviesPage++
+                if (popularMoviesResponse == null) {
+                    popularMoviesResponse = resultResponse
+                } else {
+                    val oldPopularMovies = popularMoviesResponse?.movies
+                    val newPopularMovies = resultResponse.movies
+                    oldPopularMovies?.addAll(newPopularMovies)
+                }
+                return Resource.Success(popularMoviesResponse ?: resultResponse)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun handleTopRatedMoviesResponse(response: Response<MoviesResponse>): Resource<MoviesResponse> {
+        if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse)
             }
         }
         return Resource.Error(response.message())
     }
+
+    private fun handleUpcomingMoviesResponse(response: Response<MoviesResponse>): Resource<MoviesResponse> {
+        if (response.isSuccessful) {
+            response.body()?.let { resultResponse ->
+                return Resource.Success(resultResponse)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+
 }
