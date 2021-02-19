@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutPopularMovies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="@dimen/_10sdp">
 
         <TextView
             android:id="@+id/tvPopularTitle"
@@ -23,12 +21,12 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnShowMore"
+            android:id="@+id/btnShowMorePopularMovies"
             style="@style/showMoreButtonStyle"
-            android:text="More"
+            android:text="@string/view_more"
             app:layout_constraintBottom_toBottomOf="@id/tvPopularTitle"
-            app:layout_constraintTop_toTopOf="@id/tvPopularTitle"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvPopularTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recView_popular_movies"
@@ -53,17 +51,25 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <TextView
             android:id="@+id/tvTopRatedTitle"
-            android:text="@string/top_rated"
             style="@style/tvTitleStyle"
+            android:text="@string/top_rated"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnShowMoreTopRatedMovies"
+            style="@style/showMoreButtonStyle"
+            android:text="@string/view_more"
+            app:layout_constraintBottom_toBottomOf="@id/tvTopRatedTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvTopRatedTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recView_top_rated_movies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:clipToPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -88,6 +94,14 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnShowMoreUpcomingMovies"
+            style="@style/showMoreButtonStyle"
+            android:text="@string/view_more"
+            app:layout_constraintBottom_toBottomOf="@id/tvUpcomingTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvUpcomingTitle" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recView_upcoming_movies"
             android:layout_width="match_parent"
@@ -100,4 +114,4 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -31,7 +31,6 @@ class MainActivity : BaseActivity() {
        setContentView(binding.root)
 
         initiateUI()
-
     }
 
     override fun initiateUI() {

@@ -7,5 +7,9 @@ class Constants {
         const val BASE_URL = "https://api.themoviedb.org/"
         const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500/"
         const val QUERY_PAGE_SIZE = 20
+
+        const val POPULAR = "Popular"
+        const val TOP_RATED = "Top Rated"
+        const val UPCOMING = "Upcoming"
     }
 }

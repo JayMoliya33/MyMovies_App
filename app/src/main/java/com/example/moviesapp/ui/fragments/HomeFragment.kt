@@ -8,21 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.example.moviesapp.R
 import com.example.moviesapp.adapter.MoviesCategoriesAdapter
-import com.example.moviesapp.api.ApiUtils
 import com.example.moviesapp.databinding.FragmentHomeBinding
 import com.example.moviesapp.ui.MainActivity
 import com.example.moviesapp.ui.ViewMoreActivity
+import com.example.moviesapp.util.Constants
 import com.example.moviesapp.util.Resource
 import com.example.moviesapp.viewModel.MoviesViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
-
-class HomeFragment : Fragment(R.layout.fragment_home){
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -43,21 +41,27 @@ class HomeFragment : Fragment(R.layout.fragment_home){
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
 
+        initiateUI()
+    }
+
+    private fun initiateUI() {
         homeViewModel = (activity as MainActivity).viewModel
 
         setUpPopularMovies()
         setUpTopRatedMovies()
         setUpUpcomingMovies()
 
-      //  binding.categoriesMovies.btnShowMore.setOnClickListener(this)
-        binding.btnShowMore.setOnClickListener{
-            viewAllItemFragment("POPULAR")
+        binding.moviesCategoriesLayout.btnShowMorePopularMovies.setOnClickListener {
+            viewAllItemFragment(Constants.POPULAR)
         }
 
-//        binding.categoriesMovies.btnShowMore.setOnClickListener {
-//            findNavController().navigate(R.id.action_homeFragment_to_viewAllFragment)
-//        }
+        binding.moviesCategoriesLayout.btnShowMoreTopRatedMovies.setOnClickListener {
+            viewAllItemFragment(Constants.TOP_RATED)
+        }
 
+        binding.moviesCategoriesLayout.btnShowMoreUpcomingMovies.setOnClickListener {
+            viewAllItemFragment(Constants.UPCOMING)
+        }
     }
 
     /*
@@ -158,9 +162,7 @@ class HomeFragment : Fragment(R.layout.fragment_home){
     private fun setUpPopularMoviesRecyclerView() {
         moviesCategoriesAdapter =
             MoviesCategoriesAdapter(MoviesCategoriesAdapter.VIEW_TYPE_HORIZONTAL)
-        val snapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(binding.recViewPopularMovies)
-        binding.recViewPopularMovies.apply {
+        binding.moviesCategoriesLayout.recViewPopularMovies.apply {
             adapter = moviesCategoriesAdapter
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         }
@@ -169,7 +171,7 @@ class HomeFragment : Fragment(R.layout.fragment_home){
     private fun setUpTopRatedMoviesRecyclerView() {
         moviesCategoriesAdapter =
             MoviesCategoriesAdapter(MoviesCategoriesAdapter.VIEW_TYPE_HORIZONTAL)
-        binding.recViewTopRatedMovies.apply {
+        binding.moviesCategoriesLayout.recViewTopRatedMovies.apply {
             adapter = moviesCategoriesAdapter
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         }
@@ -178,7 +180,7 @@ class HomeFragment : Fragment(R.layout.fragment_home){
     private fun setUpcomingMoviesRecyclerView() {
         moviesCategoriesAdapter =
             MoviesCategoriesAdapter(MoviesCategoriesAdapter.VIEW_TYPE_HORIZONTAL)
-        binding.recViewUpcomingMovies.apply {
+        binding.moviesCategoriesLayout.recViewUpcomingMovies.apply {
             adapter = moviesCategoriesAdapter
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         }
@@ -189,16 +191,10 @@ class HomeFragment : Fragment(R.layout.fragment_home){
         _binding = null
     }
 
-    private fun viewAllItemFragment(value: String) {
-//        val fragment: Fragment = ViewAllFragment()
-//        val bundle = Bundle()
-//        bundle.putString("value", value)
-        // fragment.arguments = bundle
-        // findNavController().navigate(R.id.action_homeFragment_to_viewAllFragment)
+    private fun viewAllItemFragment(category: String) {
 
-        Log.e("intent", "inside intent")
         val intent = Intent(activity, ViewMoreActivity::class.java)
-        intent.putExtra("category", value)
+        intent.putExtra("category", category)
         startActivity(intent)
     }
 }

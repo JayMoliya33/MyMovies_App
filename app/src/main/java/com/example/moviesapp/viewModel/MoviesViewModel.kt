@@ -3,7 +3,7 @@ package com.example.moviesapp.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviesapp.model.MoviesResponse
+import com.example.moviesapp.model.movies.MoviesResponse
 import com.example.moviesapp.repository.MoviesRepository
 import com.example.moviesapp.util.Resource
 import kotlinx.coroutines.launch
@@ -19,9 +19,11 @@ class MoviesViewModel(
 
     val topRatedMoviesdata: MutableLiveData<Resource<MoviesResponse>> = MutableLiveData()
     var topRatedMoviesPage = 1
+    var topRatedMoviesResponse: MoviesResponse? = null
 
     val upcomingMoviesdata: MutableLiveData<Resource<MoviesResponse>> = MutableLiveData()
     var upcomingMoviesPage = 1
+    var upcomingMoviesResponse: MoviesResponse? = null
 
     init {
         getPopularMovies()
@@ -67,7 +69,15 @@ class MoviesViewModel(
     private fun handleTopRatedMoviesResponse(response: Response<MoviesResponse>): Resource<MoviesResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                topRatedMoviesPage++
+                if(topRatedMoviesResponse == null){
+                    topRatedMoviesResponse = resultResponse
+                }else{
+                    val oldTopRatedMovies = topRatedMoviesResponse?.movies
+                    val newTopRatedMovies = resultResponse.movies
+                    oldTopRatedMovies?.addAll(newTopRatedMovies)
+                }
+                return Resource.Success(topRatedMoviesResponse?: resultResponse)
             }
         }
         return Resource.Error(response.message())
@@ -76,7 +86,15 @@ class MoviesViewModel(
     private fun handleUpcomingMoviesResponse(response: Response<MoviesResponse>): Resource<MoviesResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                upcomingMoviesPage++
+                if(upcomingMoviesResponse == null){
+                    upcomingMoviesResponse = resultResponse
+                }else{
+                    val oldUpcomingMovies = upcomingMoviesResponse?.movies
+                    val newUpcomingMovies = resultResponse.movies
+                    oldUpcomingMovies?.addAll(newUpcomingMovies)
+                }
+                return Resource.Success(upcomingMoviesResponse ?: resultResponse)
             }
         }
         return Resource.Error(response.message())

@@ -1,6 +1,5 @@
 package com.example.moviesapp.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -9,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.R
 import com.example.moviesapp.databinding.ItemMoviesCategoriesBinding
 import com.example.moviesapp.databinding.ItemMoviesCategoriesGridBinding
-import com.example.moviesapp.model.Movies
+import com.example.moviesapp.model.movies.Movies
 import com.example.moviesapp.util.Constants.Companion.IMAGE_BASE_URL
 import com.example.moviesapp.util.GlideAppModule
 

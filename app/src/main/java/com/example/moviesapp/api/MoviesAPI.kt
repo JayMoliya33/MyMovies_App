@@ -1,6 +1,7 @@
 package com.example.moviesapp.api
 
-import com.example.moviesapp.model.MoviesResponse
+import com.example.moviesapp.model.movies.MoviesResponse
+import com.example.moviesapp.model.slider.TrendingMediaSliderResponse
 import com.example.moviesapp.util.Constants.Companion.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
@@ -15,8 +16,6 @@ interface MoviesAPI {
             pageNumber: Int = 1,
             @Query("api_key")
             apiKey: String = API_KEY,
-            @Query("region")
-            region: String = "IN"
     ): Response<MoviesResponse>
 
     @GET(ApiUtils.TOP_RATED)
@@ -24,7 +23,9 @@ interface MoviesAPI {
             @Query("page")
             pageNumber: Int = 1,
             @Query("api_key")
-            apiKey: String = API_KEY
+            apiKey: String = API_KEY,
+            @Query("region")
+            region: String = "IN"
     ): Response<MoviesResponse>
 
     @GET(ApiUtils.UPCOMING)
@@ -32,10 +33,16 @@ interface MoviesAPI {
             @Query("page")
             pageNumber: Int = 1,
             @Query("api_key")
-            apiKey: String = API_KEY,
-            @Query("region")
-            region: String = "IN"
+            apiKey: String = API_KEY
     ): Response<MoviesResponse>
+
+    @GET(ApiUtils.TRENDING)
+    suspend fun getTrendingMedia(
+        @Query("page")
+        pageNumber: Int = 1,
+        @Query("api_key")
+        apiKey: String = API_KEY,
+    ): Response<TrendingMediaSliderResponse>
 
     @GET("movie/{movie_id}")
     fun getMovieDetail(@Path("movie_id") movieId: Int): Response<MoviesResponse>
