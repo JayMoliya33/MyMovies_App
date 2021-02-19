@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.R
-import com.example.moviesapp.databinding.ItemPopularMoviesBinding
-import com.example.moviesapp.databinding.ItemPopularMoviesGridBinding
+import com.example.moviesapp.databinding.ItemMoviesCategoriesBinding
+import com.example.moviesapp.databinding.ItemMoviesCategoriesGridBinding
 import com.example.moviesapp.model.Movies
 import com.example.moviesapp.util.Constants.Companion.IMAGE_BASE_URL
 import com.example.moviesapp.util.GlideAppModule
 
-class PopularMoviesAdapter(var viewType : Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MoviesCategoriesAdapter(var viewType : Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val differCallback = object : DiffUtil.ItemCallback<Movies>() {
         override fun areItemsTheSame(oldItem: Movies, newItem: Movies): Boolean {
@@ -31,16 +31,16 @@ class PopularMoviesAdapter(var viewType : Int) : RecyclerView.Adapter<RecyclerVi
         return viewType
     }
 
-    inner class HorizontalMoviesViewHolder(val binding: ItemPopularMoviesBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class HorizontalMoviesViewHolder(val binding: ItemMoviesCategoriesBinding) : RecyclerView.ViewHolder(binding.root)
 
-    inner class GridMoviesViewHolder(val binding: ItemPopularMoviesGridBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class GridMoviesViewHolder(val binding: ItemMoviesCategoriesGridBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         return if (viewType == VIEW_TYPE_HORIZONTAL) {
-            HorizontalMoviesViewHolder(ItemPopularMoviesBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            HorizontalMoviesViewHolder(ItemMoviesCategoriesBinding.inflate(LayoutInflater.from(parent.context), parent, false))
         } else {
-            GridMoviesViewHolder(ItemPopularMoviesGridBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            GridMoviesViewHolder(ItemMoviesCategoriesGridBinding.inflate(LayoutInflater.from(parent.context), parent, false))
         }
     }
 
@@ -51,11 +51,11 @@ class PopularMoviesAdapter(var viewType : Int) : RecyclerView.Adapter<RecyclerVi
 
         if (holder is HorizontalMoviesViewHolder) {
             holder.binding.apply {
-                tvPopularMovieTitle.text = movieItem.title
+                tvMovieTitle.text = movieItem.title
                 GlideAppModule.getRequest(root, GlideAppModule.CacheOptions.Memory)
                         .load(IMAGE_BASE_URL + movieItem.poster_path)
                         .error(R.drawable.ic_rating_star)
-                        .into(ivPopularMovies)
+                        .into(ivMovies)
             }
         } else if (holder is GridMoviesViewHolder) {
             holder.binding.apply {
@@ -79,4 +79,6 @@ class PopularMoviesAdapter(var viewType : Int) : RecyclerView.Adapter<RecyclerVi
         var VIEW_TYPE_HORIZONTAL = 1
         var VIEW_TYPE_GRID = 2
     }
+
+
 }

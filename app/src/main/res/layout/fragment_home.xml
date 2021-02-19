@@ -26,17 +26,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvPopularSubTitle"
-                android:text="@string/most_popular_movies"
-                style="@style/tvSubTitleStyle"
-                app:layout_constraintEnd_toEndOf="@id/tvPopularTitle"
-                app:layout_constraintStart_toStartOf="@id/tvPopularTitle"
-                app:layout_constraintTop_toBottomOf="@id/tvPopularTitle" />
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnShowMore"
                 style="@style/showMoreButtonStyle"
+                android:text="More"
                 app:layout_constraintBottom_toBottomOf="@id/tvPopularTitle"
                 app:layout_constraintTop_toTopOf="@id/tvPopularTitle"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -49,7 +42,7 @@
                 android:clipToPadding="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvPopularSubTitle" />
+                app:layout_constraintTop_toBottomOf="@id/tvPopularTitle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -70,14 +63,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvTopRatedSubTitle"
-                style="@style/tvSubTitleStyle"
-                android:text="@string/highest_rated_movies"
-                app:layout_constraintEnd_toEndOf="@id/tvTopRatedTitle"
-                app:layout_constraintStart_toStartOf="@id/tvTopRatedTitle"
-                app:layout_constraintTop_toBottomOf="@id/tvTopRatedTitle" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recView_top_rated_movies"
                 android:layout_width="match_parent"
@@ -86,7 +71,7 @@
                 android:clipToPadding="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTopRatedSubTitle" />
+                app:layout_constraintTop_toBottomOf="@id/tvTopRatedTitle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -107,14 +92,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvUpcomingSubTitle"
-                style="@style/tvSubTitleStyle"
-                android:text="@string/stay_updated"
-                app:layout_constraintEnd_toEndOf="@id/tvUpcomingTitle"
-                app:layout_constraintStart_toStartOf="@id/tvUpcomingTitle"
-                app:layout_constraintTop_toBottomOf="@id/tvUpcomingTitle" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recView_upcoming_movies"
                 android:layout_width="match_parent"
@@ -123,7 +100,7 @@
                 android:clipToPadding="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvUpcomingSubTitle" />
+                app:layout_constraintTop_toBottomOf="@id/tvUpcomingTitle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -132,7 +109,6 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
-            android:layout_marginTop="@dimen/_20sdp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

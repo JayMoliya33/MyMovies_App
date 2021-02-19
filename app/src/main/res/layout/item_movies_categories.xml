@@ -7,7 +7,7 @@
     android:padding="@dimen/_4sdp">
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/ivPopularMovies"
+        android:id="@+id/ivMovies"
         android:layout_width="@dimen/_90sdp"
         android:layout_height="@dimen/_120sdp"
         android:layout_marginStart="@dimen/_10sdp"
@@ -20,7 +20,7 @@
         app:riv_corner_radius="@dimen/_5sdp" />
 
     <TextView
-        android:id="@+id/tvPopularMovieTitle"
+        android:id="@+id/tvMovieTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
@@ -33,8 +33,8 @@
         android:maxLines="3"
         android:textColor="@color/colorTextPrimary"
         android:textSize="@dimen/_10ssp"
-        app:layout_constraintEnd_toEndOf="@id/ivPopularMovies"
-        app:layout_constraintStart_toStartOf="@id/ivPopularMovies"
-        app:layout_constraintTop_toBottomOf="@id/ivPopularMovies" />
+        app:layout_constraintEnd_toEndOf="@id/ivMovies"
+        app:layout_constraintStart_toStartOf="@id/ivMovies"
+        app:layout_constraintTop_toBottomOf="@id/ivMovies" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

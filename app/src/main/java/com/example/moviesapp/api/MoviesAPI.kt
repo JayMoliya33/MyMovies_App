@@ -11,10 +11,12 @@ interface MoviesAPI {
 
     @GET(ApiUtils.POPULAR)
     suspend fun getPopularMovies(
-        @Query("page")
-        pageNumber: Int = 1,
-        @Query("api_key")
-        apiKey: String = API_KEY
+            @Query("page")
+            pageNumber: Int = 1,
+            @Query("api_key")
+            apiKey: String = API_KEY,
+            @Query("region")
+            region: String = "IN"
     ): Response<MoviesResponse>
 
     @GET(ApiUtils.TOP_RATED)
@@ -30,7 +32,9 @@ interface MoviesAPI {
             @Query("page")
             pageNumber: Int = 1,
             @Query("api_key")
-            apiKey: String = API_KEY
+            apiKey: String = API_KEY,
+            @Query("region")
+            region: String = "IN"
     ): Response<MoviesResponse>
 
     @GET("movie/{movie_id}")

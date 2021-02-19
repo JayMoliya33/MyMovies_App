@@ -1,6 +1,7 @@
 package com.example.moviesapp.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class MoviesResponse(
         val page: Int,
@@ -8,4 +9,4 @@ data class MoviesResponse(
         val movies: MutableList<Movies>,
         val total_pages: Int,
         val total_results: Int
-)
+) : Serializable
