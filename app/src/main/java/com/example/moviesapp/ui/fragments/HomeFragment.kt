@@ -1,6 +1,7 @@
 package com.example.moviesapp.ui.fragments
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,6 +22,9 @@ import com.example.moviesapp.ui.ViewMoreActivity
 import com.example.moviesapp.util.Constants
 import com.example.moviesapp.util.Resource
 import com.example.moviesapp.viewModel.MoviesViewModel
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
+import com.smarteist.autoimageslider.SliderAnimations
+import com.smarteist.autoimageslider.SliderView
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -77,12 +81,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     hideProgressBar()
                     response.data?.let { mediaResponse ->
                         sliderAdapter = SliderAdapter(mediaResponse.sliderBanners)
-                        binding.slider.adapter = sliderAdapter
+                        binding.slider.setSliderAdapter(sliderAdapter)
+                        //set indicator animation by using IndicatorAnimationType. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+                        binding.slider.setIndicatorAnimation(IndicatorAnimationType.WORM);
+                        binding.slider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+                        binding.slider.autoCycleDirection = SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH;
+                        binding.slider.indicatorSelectedColor = Color.WHITE;
+                        binding.slider.indicatorUnselectedColor = Color.GRAY;
+                        binding.slider.scrollTimeInSec = 4; //set scroll delay in seconds :
+                        binding.slider.startAutoCycle();
 //                        binding.slider.apply {
 //                            adapter = sliderAdapter
 //                        }
                         Log.e("viewpager", mediaResponse.total_results.toString())
-
                     }
                 }
                 is Resource.Error -> {

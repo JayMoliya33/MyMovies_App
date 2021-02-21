@@ -9,20 +9,43 @@
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/slider"
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/sliderCardView"
+            app:cardCornerRadius="@dimen/_6sdp"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_margin="@dimen/_8sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_height="@dimen/_200sdp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <com.smarteist.autoimageslider.SliderView
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            app:sliderAnimationDuration="600"
+            app:sliderAutoCycleDirection="back_and_forth"
+            app:sliderAutoCycleEnabled="true"
+            app:sliderIndicatorAnimationDuration="600"
+            app:sliderIndicatorGravity="center_horizontal|bottom"
+            app:sliderIndicatorMargin="15dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="3dp"
+            app:sliderIndicatorRadius="2dp"
+            app:sliderIndicatorSelectedColor="#5A5A5A"
+            app:sliderIndicatorUnselectedColor="#FFF"
+            app:sliderScrollTimeInSec="1"
+            app:sliderStartAutoCycle="true" />
+
+        </androidx.cardview.widget.CardView>
 
         <include
             android:id="@+id/moviesCategoriesLayout"
             android:layout_width="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/slider"
+            app:layout_constraintTop_toBottomOf="@id/sliderCardView"
             layout="@layout/movies_categories_layout"
             android:layout_height="wrap_content" />
 

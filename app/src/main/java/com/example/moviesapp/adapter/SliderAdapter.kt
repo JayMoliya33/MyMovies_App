@@ -2,42 +2,23 @@ package com.example.moviesapp.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.PagerAdapter
 import com.example.moviesapp.R
-import com.example.moviesapp.databinding.ItemMoviesCategoriesBinding
-import com.example.moviesapp.databinding.ItemMoviesCategoriesGridBinding
 import com.example.moviesapp.databinding.SliderItemBinding
-import com.example.moviesapp.model.movies.Movies
 import com.example.moviesapp.model.slider.SliderBanner
 import com.example.moviesapp.util.Constants
 import com.example.moviesapp.util.GlideAppModule
-import kotlinx.android.synthetic.main.slider_item.view.*
+import com.smarteist.autoimageslider.SliderViewAdapter
 
-class SliderAdapter(private var sliderModelList: List<SliderBanner>) :
-    RecyclerView.Adapter<SliderAdapter.HorizontalMoviesViewHolder>() {
+class SliderAdapter(private var sliderModelList: MutableList<SliderBanner>) :
+    SliderViewAdapter<SliderAdapter.SliderViewHolder>() {
 
-    inner class HorizontalMoviesViewHolder(var binding: SliderItemBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    override fun onCreateViewHolder(parent: ViewGroup): SliderViewHolder {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HorizontalMoviesViewHolder {
-
-        return HorizontalMoviesViewHolder(
-            SliderItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+        return SliderViewHolder(SliderItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun getItemCount() = sliderModelList.size
-
-    override fun onBindViewHolder(holder: HorizontalMoviesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
         Log.e("onBind", "inside onbindview")
 
         holder.binding.apply {
@@ -47,6 +28,21 @@ class SliderAdapter(private var sliderModelList: List<SliderBanner>) :
                 .into(sliderImg)
             sliderTitle.text = sliderModelList[position].title
         }
+
+//        holder.itemView.setOnClickListener {
+//            Toast.makeText(
+//                context,
+//                "This is item in position $position",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//        }
     }
+
+    override fun getCount(): Int {
+        //slider view count could be dynamic size
+        return 5
+    }
+
+    inner class SliderViewHolder(var binding: SliderItemBinding) : ViewHolder(binding.root)
 
 }

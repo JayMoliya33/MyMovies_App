@@ -7,7 +7,7 @@ class ApiUtils {
         const val TOP_RATED = "/3/movie/top_rated"
         const val UPCOMING = "/3/movie/upcoming"
 
-        const val TRENDING = "3/trending/all/day"
+        const val TRENDING = "3/trending/movie/day"
 
     }
 }
