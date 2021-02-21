@@ -6,12 +6,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.HorizontalScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.viewpager2.widget.ViewPager2
 import com.example.moviesapp.R
 import com.example.moviesapp.adapter.MoviesCategoriesAdapter
+import com.example.moviesapp.adapter.SliderAdapter
 import com.example.moviesapp.databinding.FragmentHomeBinding
 import com.example.moviesapp.ui.MainActivity
 import com.example.moviesapp.ui.ViewMoreActivity
@@ -27,6 +30,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var homeViewModel: MoviesViewModel
     private lateinit var moviesCategoriesAdapter: MoviesCategoriesAdapter
+    private lateinit var sliderAdapter: SliderAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,6 +55,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setUpTopRatedMovies()
         setUpUpcomingMovies()
 
+        setUpSlider()
+
         binding.moviesCategoriesLayout.btnShowMorePopularMovies.setOnClickListener {
             viewAllItemFragment(Constants.POPULAR)
         }
@@ -62,6 +68,35 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.moviesCategoriesLayout.btnShowMoreUpcomingMovies.setOnClickListener {
             viewAllItemFragment(Constants.UPCOMING)
         }
+    }
+
+    private fun setUpSlider() {
+        homeViewModel.trendingMediaData.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+                is Resource.Success -> {
+                    hideProgressBar()
+                    response.data?.let { mediaResponse ->
+                        sliderAdapter = SliderAdapter(mediaResponse.sliderBanners)
+                        binding.slider.adapter = sliderAdapter
+//                        binding.slider.apply {
+//                            adapter = sliderAdapter
+//                        }
+                        Log.e("viewpager", mediaResponse.total_results.toString())
+
+                    }
+                }
+                is Resource.Error -> {
+                    response.message?.let { message ->
+                        hideProgressBar()
+                        Log.e("Errors", "An error occured $message")
+                    }
+                }
+                is Resource.Loading -> {
+                    Log.e("loading", "inside loading")
+                    showProgressBar()
+                }
+            }
+        })
     }
 
     /*

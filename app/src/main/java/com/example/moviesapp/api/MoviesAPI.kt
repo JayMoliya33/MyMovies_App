@@ -1,7 +1,7 @@
 package com.example.moviesapp.api
 
 import com.example.moviesapp.model.movies.MoviesResponse
-import com.example.moviesapp.model.slider.TrendingMediaSliderResponse
+import com.example.moviesapp.model.slider.TrendingMediaResponse
 import com.example.moviesapp.util.Constants.Companion.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
@@ -42,7 +42,7 @@ interface MoviesAPI {
         pageNumber: Int = 1,
         @Query("api_key")
         apiKey: String = API_KEY,
-    ): Response<TrendingMediaSliderResponse>
+    ): Response<TrendingMediaResponse>
 
     @GET("movie/{movie_id}")
     fun getMovieDetail(@Path("movie_id") movieId: Int): Response<MoviesResponse>

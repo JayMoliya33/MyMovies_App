@@ -12,4 +12,7 @@ class MoviesRepository {
 
     suspend fun getUpcomingMovies(page : Int) =
             RetrofitInstance.api.getUpcomingMovies(page)
+
+    suspend fun getTrendingMedia(page : Int) =
+        RetrofitInstance.api.getTrendingMedia(page)
 }

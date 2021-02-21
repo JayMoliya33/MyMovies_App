@@ -14,7 +14,6 @@
             android:layout_width="match_parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_height="@dimen/_200sdp" />
 
